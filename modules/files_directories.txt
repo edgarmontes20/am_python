@@ -1,0 +1,35 @@
+Create file
+We are creating file.
+
+Delete file
+We are deleting file.
+
+Rename file
+We are renaming file.
+
+Change permissions
+We are changing permissions file.
+
+Create
+We are creating directory.
+
+visualDelete
+We are deleting directory.
+
+Rename directory
+We are renaming directory.
+
+List 
+We are listing files.
+
+Search 
+We are searching file.
+
+Move
+We are moving file.
+
+graphic
+We are creating graphic
+
+data base
+We are writing in data base
