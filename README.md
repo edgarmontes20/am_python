@@ -1,2 +1,7 @@
 # am_python
-protecto_chatbot
+# proyecto_chatbot
+
+Ejecutar chatbot.py
+```sh
+python3 chatbot.py
+```
