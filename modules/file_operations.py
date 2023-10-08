@@ -32,6 +32,9 @@ class File(Directory):
                 self.path = os.path.dirname(destination_path)
                 self.name = os.path.basename(destination_path) 
                 print(f"The file has moved successfully to '{destination_path}'.")
+            else:
+                print("Please validate the origin and destination path they do not exist")
+
         except shutil.Error as e:
             print(f"Error of shutil moving file: {e}")
         except Exception as e:
