@@ -179,6 +179,8 @@ if __name__ == '__main__':
             if exit_choice == "yes":
                 flag = False
                 print("Exiting the program.")
+        elif dir_path == 'bye':
+            break
         else:
             print(f"The directory {dir_path} does not exist")
             print(f"Please try again with a valid absolute path")
