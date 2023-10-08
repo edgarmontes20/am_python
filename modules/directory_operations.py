@@ -21,7 +21,7 @@ class Directory():
     def show_list_dir(self, directory_path):
         """Muestra una lista de archivos y subdirectorios en el directorio actual."""
         try:
-            content_list = os.listdir(os.path.dirname(directory_path))  # Lista de contenido en la ruta completa
+            content_list = os.listdir(directory_path)  # Lista de contenido en la ruta completa
             print(f'\nThe elements in the path {directory_path} are : \n')
             for element in content_list:
                 print(element)

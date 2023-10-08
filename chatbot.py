@@ -4,7 +4,7 @@ import os
 from modules.directory_operations import Directory
 from modules.file_operations import File
 from charts.chart_generation import DataProcessor
-from data.manage_db import Upload_csv_to_db
+from data.manage_db import CSVToDBLoader
 from datetime import datetime
 
 def run_chatbot(chat):
@@ -56,9 +56,8 @@ def run_chatbot(chat):
                 # 3. Mostrar lista de archivos y subdirectorios
                 elif 'list files' in user_response:
                     #print(chat.directory.list_files())
-                    path_dir = os.path.join(dir_path, name)
-                    directorio = Directory(path_dir)
-                    directorio.show_list_dir(path_dir)
+                    directorio = Directory(dir_path)
+                    directorio.show_list_dir(dir_path)
                 # 4. Renombrar directorio
                 elif 'rename directory' in user_response:
                     old_name = tokens[tokens.index('directory') + 1]
@@ -105,7 +104,7 @@ def run_chatbot(chat):
                     archivo = File(file_path)
                     archivo.change_permissions_file(file_path, permissions)
                 # 9. Buscar archivo en directorio y subdirectorios
-                elif 'search' in user_response or 'find' in user_response or 'lookup' in user_response:
+                elif 'search' in user_response:
                     search_keywords = ['search', 'find', 'lookup']
                     name = tokens[tokens.index('search') + 1]
                     file_to_find = tokens[tokens.index(next((word for word in tokens if word in search_keywords), None)) + 1] if any(word in tokens for word in search_keywords) else None
@@ -113,16 +112,17 @@ def run_chatbot(chat):
                     archivo = File(base_directory)
                     archivo.searcher_file(base_directory, file_to_find)
                 # 10. Sube data_processed.csv a una BD
-                elif 'insert data to base' in user_response:
-
-                    input_file_path = input("Please enter the absolute path of the CSV file name to upload: ")
-                    upload_file = Upload_csv_to_db(input_file_path)
-                    grafica.upload_info(upload_file)
+                elif 'insert data to DB' in user_response:
+                    loader = CSVToDBLoader(db_url)
+                    csv_file_path = input("Please enter the absolute path of the CSV file name to upload: ")
+                    # Load the CSV file into the database
+                    loader.load_csv_to_db(csv_file_path, table_name)
 
                 # 11. Buscar el NIT en dentro de data_processed.csv y grafica el valor de contratos por año-mes
                 elif 'graphic' in user_response:
                     #input_file_path = input("Please enter the absolute path of the CSV file that you want to use for generating graphics:  ")
-                    input_file_path = r'E:\Python_PCAP\Proyecto_PCAP\chatbot\data\data_et\data_processed.csv'
+                    input_file_path = input("Please enter the absolute path of the csv file to graphic: ")
+                    #r'E:\Python_PCAP\Proyecto_PCAP\chatbot\data\data_et\data_processed.csv'
                     grafica = DataProcessor(input_file_path) # instancia la clase DataProcessor con la ruta ABS del insumo de datos
                     group_filter = input("Please enter the ID (NIT) to filter: ") # solicita NIT para filtro de datos
 
@@ -142,28 +142,46 @@ def run_chatbot(chat):
                     break
 
     except LookupError as err:
-        print ('Tenemos un error',err)  
+        print ('We have an error',err)  
 
 if __name__ == '__main__':
     
-    dir_path = r'E:\Python_PCAP\Proyecto_PCAP\chatbot\Work_folder'
-    #print(dir_path)
+    #dir_path = r'E:\Python_PCAP\Proyecto_PCAP\chatbot\Work_folder'
+    print(f"\n Welcome to Chatbot \n")
 
-    #obtener la ruta absoluta del directorio.
-    absolute_path = os.path.abspath(dir_path)
-    #print(absolute_path)
-    
-    #Instanciando objeto de tipo Directory
-    directory = Directory(absolute_path)
-    
-    #Ruta con corpus usado para entrenar el modelo
-    path_corpus = r"E:\Python_PCAP\Proyecto_PCAP\chatbot\modules\files_directories.txt"
+    flag = True
+    while flag:
+        dir_path = input('Please enter the absolute directory path where you want to execute the program: ')
+        #print(dir_path)
 
-    
-    #Instanciando objeto de tipo Nlp
-    chatbot = Nlp(directory, path_corpus)
-    print('Intanciado objeto')
-    chatbot.initialize_nlp()
-    print('Inicializado modulo nlp')
-    run_chatbot(chatbot)
-    print('Chat finalizado')
+        if os.path.exists(dir_path) and os.path.isdir(dir_path):
+            # El directorio existe y es un directorio
+            #obtener la ruta absoluta del directorio.
+            absolute_path = os.path.abspath(dir_path)
+            #print(absolute_path)          
+            #Instanciando objeto de tipo Directory
+            directory = Directory(absolute_path)           
+            #Ruta con corpus usado para entrenar el modelo
+            path_corpus = r"E:\Python_PCAP\Proyecto_PCAP\chatbot\modules\files_directories.txt"
+            # Database connection URL (adjust according to your configuration)
+            db_url = "mysql+mysqlconnector://root:admin@localhost/CONTRACTS_DB"
+            # Name of the table in the database
+            table_name = "contrato"          
+            #Instanciando objeto de tipo Nlp
+            chatbot = Nlp(directory, path_corpus)
+            print('Intanciado objeto')
+            chatbot.initialize_nlp()
+            print('Inicializado modulo nlp')
+            run_chatbot(chatbot)
+            print('Chat finalizado')
+            # Después de que el chatbot haya terminado, verifica si el usuario quiere salir
+            exit_choice = input("Do you want to exit? (yes/no): ").lower()
+            if exit_choice == "yes":
+                flag = False
+                print("Exiting the program.")
+        else:
+            print(f"The directory {dir_path} does not exist")
+            print(f"Please try again with a valid absolute path")
+        
+
+

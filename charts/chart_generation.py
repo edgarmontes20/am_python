@@ -106,9 +106,9 @@ class DataProcessor:
 
         plt.figure(figsize=(10, 8))  # Ajusta el tamaño de la ventana del gráfico 
         plt.bar(axis_x, axis_y, width=0.5) # asigna los datos de ejes para la grafica y ancho de barras
-        plt.xlabel('Sign Dates')
-        plt.ylabel('Contract Values')
-        plt.title(f'Value contract signed per year-month {group_filter} ({selected_year})')
+        plt.xlabel('Contracts Sign Dates')
+        plt.ylabel('Contract Amounts')
+        plt.title(f'Value contract signed per year-month for ID (NIT) {group_filter} ({selected_year})')
         plt.xticks(rotation = 90)
         self.save_figure(group_filter,selected_year) # llama al metodo q guardara la grafica generada
         plt.show() # muestra la grafica al usuario
