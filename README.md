@@ -35,7 +35,7 @@ db_url = "mysql+mysqlconnector://root:admin@localhost/CONTRACTS_DB"
 
 crear tabla contrato en BD
 ```sh 
-```
+
 create table contrato (
 nivel_entidad varchar(255) 
 ,nombre_de_la_entidad varchar(255) 
