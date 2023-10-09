@@ -75,19 +75,19 @@ nivel_entidad varchar(255)
 
 Ejemplo palabras para uso del chatbot:
 
-create directory new -> Crea directorio new
-create file file_1.txt -> crea archivo file_1.txt
-list files -> muestra la lista de archivos y directorios de una carpeta
-rename directory hola to nuevo -> cambia el nombre del directorio hola por nuevo
-rename file archivo.txt to renombrado.txt -> cambia el nombre del archivo.txt por renombrado.txt
-move file -> solicitara la ruta absoluta del origen y del destino para mover el archivo asi
+>create directory new -> Crea directorio new
+>create file file_1.txt -> crea archivo file_1.txt
+>list files -> muestra la lista de archivos y directorios de una carpeta
+>rename directory hola to nuevo -> cambia el nombre del directorio hola por nuevo
+>rename file archivo.txt to renombrado.txt -> cambia el nombre del archivo.txt por renombrado.txt
+>move file -> solicitara la ruta absoluta del origen y del destino para mover el archivo asi
 origen Y:\test\file_1.txt 
 destino Y:\test\temp
-delete file files.csv-> borra archivo files.csv
-change permissions files.csv to 745 -> cambia los permisos del archivo files.csv al formato octal 745
-search files_1.txt -> busca el archivo files_1.txt e indica la ruta absoluta donde lo encuentra
-insert data to DB -> solicita la ruta absoluta del archivo de datos procesados *.csv a cargar en la BD my sql
-graphic -> solicita la ruta del insumo csv para lectura de datos, el NIT y el año para graficar. Genera y guarda la grafica.
+>delete file files.csv-> borra archivo files.csv
+>change permissions files.csv to 745 -> cambia los permisos del archivo files.csv al formato octal 745
+>search files_1.txt -> busca el archivo files_1.txt e indica la ruta absoluta donde lo encuentra
+>insert data to DB -> solicita la ruta absoluta del archivo de datos procesados *.csv a cargar en la BD my sql
+>graphic -> solicita la ruta del insumo csv para lectura de datos, el NIT y el año para graficar. Genera y guarda la grafica.
 
 3-En algunos casos se solicita ingresar la ruta absoluta para el proceso 
 
