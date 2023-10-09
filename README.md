@@ -1,6 +1,7 @@
 # am_python
 ## proyecto_chatbot
 
+
 Ejecutar chatbot.py
 ```sh
 python3 chatbot.py
@@ -24,18 +25,24 @@ Se debe configurar la ruta del path_corpus files_directories.txt en el chatbot.p
 
 Ejemplo:
 
+```sh
 path_corpus = r"E:\Python_PCAP\Proyecto_PCAP\chatbot\modules\files_directories.txt"
+
+```
 
 ### Instrucciones de uso del chatbot
 
 Al inicio solicitara una ruta absoluta de trabajo:
 
 1-Se debe crear una Base de datos en mysql con el nombre CONTRACTS_DB, esta es la cadena de conexion:
+
+```sh
 db_url = "mysql+mysqlconnector://root:admin@localhost/CONTRACTS_DB"
 
-crear tabla contrato en BD
-```sh 
+```
+### crear tabla contrato en BD
 
+```sh 
 create table contrato (
 nivel_entidad varchar(255) 
 ,nombre_de_la_entidad varchar(255) 
@@ -83,6 +90,11 @@ insert data to DB -> solicita la ruta absoluta del archivo de datos procesados *
 graphic -> solicita la ruta del insumo csv para lectura de datos, el NIT y el año para graficar. Genera y guarda la grafica.
 
 3-En algunos casos se solicita ingresar la ruta absoluta para el proceso 
-ej: E:\Python_PCAP\Proyecto_PCAP\chatbot\data\data_et\data_processed.csv
+
+ejemplo, use la ruta donde descargo el programa: 
+
+```sh
+E:\Python_PCAP\Proyecto_PCAP\chatbot\data\data_et\data_processed.csv
+```
 
 4-Los graficos generados quedaran grabados en la ruta del insumo de datos csv.
